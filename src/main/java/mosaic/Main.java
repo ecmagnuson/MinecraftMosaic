@@ -28,7 +28,11 @@ public class Main {
 	public static List<UserImage> getImages() throws IOException {
 		var imageFile = new File(System.getProperty("user.dir") + "/inputimages/");
 		var images = new ArrayList<UserImage>();
+		// fileName.substring(fileName.lastIndexOf('.'))
 		for (File f : imageFile.listFiles()) {
+			if (f.getName().equals(".gitignore")) {
+				continue;
+			}
 			var name = f.getName();
 			var image = ImageIO.read(f);
 			images.add(new UserImage(name, image));
@@ -103,5 +107,8 @@ public class Main {
 		List<Block> blocks = getBlocks();
 		List<UserImage> images = getImages();
 		transform(images, blocks);
+
+		System.out.println("Done :)");
+		System.out.println(String.format("all images (%d) are in /output", images.size()));
 	}
 }
