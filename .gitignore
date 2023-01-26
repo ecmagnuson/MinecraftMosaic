@@ -1,0 +1,10 @@
+#Eclipse
+.classpath
+.project
+.settings/
+
+#Maven
+target/
+
+output/
+src/main/java/mosaic/Sandbox.java
