@@ -6,6 +6,5 @@
 #Maven
 target/
 
-inputimages/
 output/
 src/main/java/mosaic/Sandbox.java
