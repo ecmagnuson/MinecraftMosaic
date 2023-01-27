@@ -77,9 +77,9 @@ public class Main {
 		return image;
 	}
 
-	public static void transform(List<UserImage> images, List<Block> blocks) throws IOException {
-		for (UserImage ui : images) {
-			var minecraftMosaic = createCanvas(16 * ui.image().getWidth(), 16 * ui.image().getHeight(),
+	public static void transform(List<UserImage> userImages, List<Block> blocks) throws IOException {
+		for (var ui : userImages) {
+			BufferedImage minecraftMosaic = createCanvas(16 * ui.image().getWidth(), 16 * ui.image().getHeight(),
 					Color.DARK_GRAY);
 			for (int x = 0; x < ui.image().getWidth(); x++) {
 				for (int y = 0; y < ui.image().getHeight(); y++) {

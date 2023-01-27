@@ -37,13 +37,13 @@ public class Block {
 
 		for (int x = 0; x < image.getWidth(); x++) {
 			for (int y = 0; y < image.getHeight(); y++) {
-				var pixel = image.getRGB(x, y);
+				int pixel = image.getRGB(x, y);
 				var pixelColor = new Color(pixel, true);
 				// https://stackoverflow.com/questions/12408431/how-can-i-get-the-average-color-of-an-image
 				// https://stackoverflow.com/questions/649454/what-is-the-best-way-to-average-two-colors-that-define-a-linear-gradient
-				var tempR = (int) Math.pow(pixelColor.getRed(), 2);
-				var tempG = (int) Math.pow(pixelColor.getGreen(), 2);
-				var tempB = (int) Math.pow(pixelColor.getBlue(), 2);
+				int tempR = (int) Math.pow(pixelColor.getRed(), 2);
+				int tempG = (int) Math.pow(pixelColor.getGreen(), 2);
+				int tempB = (int) Math.pow(pixelColor.getBlue(), 2);
 				r += tempR;
 				g += tempG;
 				b += tempB;
