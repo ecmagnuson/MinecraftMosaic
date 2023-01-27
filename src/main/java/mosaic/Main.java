@@ -80,7 +80,7 @@ public class Main {
 	public static void transform(List<UserImage> userImages, List<Block> blocks) throws IOException {
 		for (var ui : userImages) {
 			BufferedImage minecraftMosaic = createCanvas(16 * ui.image().getWidth(), 16 * ui.image().getHeight(),
-					Color.DARK_GRAY);
+					Color.WHITE);
 			for (int x = 0; x < ui.image().getWidth(); x++) {
 				for (int y = 0; y < ui.image().getHeight(); y++) {
 					int pixel = ui.image().getRGB(x, y);
