@@ -65,12 +65,11 @@ public class Main {
 		return match;
 	}
 
-	// Create a BufferedImage with a specified width and height, filled in by a
-	// color
-	public static BufferedImage createCanvas(int width, int height, Color color) throws IOException {
+	// Create a white BufferedImage with a specified width and height,
+	public static BufferedImage createCanvas(int width, int height) throws IOException {
 		var image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D g = image.createGraphics();
-		g.setColor(color);
+		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, height);
 		g.dispose();
 		return image;
@@ -85,8 +84,7 @@ public class Main {
 
 	public static void transform(List<UserImage> userImages, List<Block> blocks) throws IOException {
 		for (var ui : userImages) {
-			BufferedImage minecraftMosaic = createCanvas(16 * ui.image().getWidth(), 16 * ui.image().getHeight(),
-					Color.WHITE);
+			BufferedImage minecraftMosaic = createCanvas(16 * ui.image().getWidth(), 16 * ui.image().getHeight());
 			for (int x = 0; x < ui.image().getWidth(); x++) {
 				for (int y = 0; y < ui.image().getHeight(); y++) {
 					int pixel = ui.image().getRGB(x, y);
