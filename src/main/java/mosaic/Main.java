@@ -39,6 +39,23 @@ public class Main {
 		return images;
 	}
 
+	// Create a white BufferedImage with a specified width and height,
+	public static BufferedImage createCanvas(int width, int height) throws IOException {
+		var image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = image.createGraphics();
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, width, height);
+		g.dispose();
+		return image;
+	}
+
+	// save the newly created mosaic to the /output directory
+	public static void saveMinecraftImage(BufferedImage minecraftMosaic, String name) throws IOException {
+		Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/output"));
+		var output = new File(System.getProperty("user.dir") + "/output/" + "Minecraft" + name);
+		ImageIO.write(minecraftMosaic, "png", output);
+	}
+
 	// get the difference in RGB values for a Color
 	public static int calculateDiff2Colors(Color color1, Color color2) {
 		int r1 = color1.getRed();
@@ -65,23 +82,6 @@ public class Main {
 		return match;
 	}
 
-	// Create a white BufferedImage with a specified width and height,
-	public static BufferedImage createCanvas(int width, int height) throws IOException {
-		var image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
-		Graphics2D g = image.createGraphics();
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, width, height);
-		g.dispose();
-		return image;
-	}
-
-	// save the newly created mosaic to the /output directory
-	public static void saveMinecraftImage(BufferedImage minecraftMosaic, String name) throws IOException {
-		Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/output"));
-		var output = new File(System.getProperty("user.dir") + "/output/" + "Minecraft" + name);
-		ImageIO.write(minecraftMosaic, "png", output);
-	}
-
 	public static void transform(List<UserImage> userImages, List<Block> blocks) throws IOException {
 		for (var ui : userImages) {
 			BufferedImage minecraftMosaic = createCanvas(16 * ui.image().getWidth(), 16 * ui.image().getHeight());
@@ -93,13 +93,12 @@ public class Main {
 					Color match = matchPixelToBlock(pixelColor, blocks);
 					var blockImage = Block.color2image.get(match);
 					if (blockImage == null) {
-						// could def make this better
 						// Color of obsidian.png is r=24,g=20,b=35
 						blockImage = Block.color2image.get(new Color(24, 20, 35));
 					}
-					var blockToPaste = (Graphics2D) minecraftMosaic.getGraphics();
+					Graphics2D graphic = minecraftMosaic.createGraphics();
 					// blocks are 16 x 16 images
-					blockToPaste.drawImage(blockImage, null, x * 16, y * 16);
+					graphic.drawImage(blockImage, null, x * 16, y * 16);
 				}
 			}
 			saveMinecraftImage(minecraftMosaic, ui.name());

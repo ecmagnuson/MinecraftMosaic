@@ -11,7 +11,7 @@ import java.util.TreeMap;
 
 import javax.imageio.ImageIO;
 
-public class Block implements Comparable<Block> {
+public class Block {
 
 	private File path; // path of Block
 	private String name;
@@ -20,7 +20,7 @@ public class Block implements Comparable<Block> {
 	private int count;
 
 	protected final static Map<Block, Color> block2Color = new HashMap<>();
-	 protected final static Map<Color, BufferedImage> color2image = new HashMap<>();
+	protected final static Map<Color, BufferedImage> color2image = new HashMap<>();
 	// TreeMap<>();
 
 	public Block(File path) throws IOException {
@@ -29,8 +29,8 @@ public class Block implements Comparable<Block> {
 		this.image = ImageIO.read(this.path);
 		this.avgRGBColors = this.calculateAvgRGBColors(this.image);
 
-		 color2image.put(this.avgRGBColors, this.image);
-		//block2Color.put(this, this.avgRGBColors);
+		color2image.put(this.avgRGBColors, this.image);
+		// block2Color.put(this, this.avgRGBColors);
 		// counts.put(this, counts.get(this) + 1);
 	}
 
@@ -61,17 +61,6 @@ public class Block implements Comparable<Block> {
 		return new Color(avgR, avgG, avgB);
 	}
 
-	// WIP TODO
-	public Double calculateRGBSum() {
-		// return (int) Math.sqrt(Math.pow((r1 - r2), 2) + Math.pow((g1 - g2), 2) +
-		// Math.pow((b1 - b2), 2));
-		int r = this.avgRGBColors.getRed();
-		int g = this.avgRGBColors.getGreen();
-		int b = this.avgRGBColors.getBlue();
-
-		return 0.0;
-	}
-
 	public BufferedImage getImage() {
 		return this.image;
 	}
@@ -82,12 +71,6 @@ public class Block implements Comparable<Block> {
 
 	public void incrementCount(String name) {
 		this.count++;
-	}
-
-	@Override
-	public int compareTo(Block o) {
-
-		return 0;
 	}
 
 }
