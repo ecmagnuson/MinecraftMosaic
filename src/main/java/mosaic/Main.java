@@ -14,14 +14,11 @@ import javax.imageio.ImageIO;
 
 public class Main {
 	
-	private static int loopCount = 0;
-
 	// return a List of all Block objects in /blocks dir
 	public static List<Block> getBlocks() throws IOException {
 		var blockFile = new File(System.getProperty("user.dir") + "/blocks/");
 		var blocks = new ArrayList<Block>();
 		for (File block : blockFile.listFiles()) {
-			loopCount++;
 			blocks.add(new Block(block.getAbsoluteFile()));
 		}
 		return blocks;
@@ -33,7 +30,6 @@ public class Main {
 		var images = new ArrayList<UserImage>();
 		// fileName.substring(fileName.lastIndexOf('.'))
 		for (File f : imageFile.listFiles()) {
-			loopCount++;
 			if (f.getName().equals(".gitignore")) {
 				continue;
 			}
@@ -64,7 +60,6 @@ public class Main {
 		int minDist = calculateDiff2Colors(pixel, match);
 		//for each block see how close it is to this color, return that color
 		for (var block : blocks) {
-			loopCount++;
 			int dist = calculateDiff2Colors(pixel, block.getAvgRGBColors());
 			if (dist < minDist) {
 				minDist = dist;
@@ -87,13 +82,10 @@ public class Main {
 
 	public static void transform(List<UserImage> userImages, List<Block> blocks) throws IOException {
 		for (var ui : userImages) {
-			loopCount++;
 			BufferedImage minecraftMosaic = createCanvas(16 * ui.image().getWidth(), 16 * ui.image().getHeight(),
 					Color.WHITE);
 			for (int x = 0; x < ui.image().getWidth(); x++) {
-				loopCount++;
 				for (int y = 0; y < ui.image().getHeight(); y++) {
-					loopCount++;
 					int pixel = ui.image().getRGB(x, y);
 					var pixelColor = new Color(pixel, true);
 					//Find the color that matches a Block value that is closest to the image Pixel
@@ -121,8 +113,6 @@ public class Main {
 		List<UserImage> images = getImages();
 		transform(images, blocks);
 		
-		System.out.println(loopCount);
-
 		System.out.println("Done :)");
 		System.out.println(String.format("all images (%d) are in /output", images.size()));
 	}
