@@ -61,10 +61,16 @@ public class Main {
 		int r1 = color1.getRed();
 		int g1 = color1.getGreen();
 		int b1 = color1.getBlue();
+		
 		int r2 = color2.getRed();
 		int g2 = color2.getGreen();
 		int b2 = color2.getBlue();
-		return (int) Math.sqrt(Math.pow((r1 - r2), 2) + Math.pow((g1 - g2), 2) + Math.pow((b1 - b2), 2));
+		
+		double rDiff = Math.pow((r1 - r2), 2);
+		double gDiff = Math.pow((g1 - g2), 2);
+		double bDiff = Math.pow((b1 - b2), 2); 
+		
+		return (int) (Math.sqrt(rDiff / 2) + Math.sqrt(gDiff / 2) + Math.sqrt(bDiff / 2));
 	}
 
 	// return the Color of the Block that has the closest RGB value to a Color pixel

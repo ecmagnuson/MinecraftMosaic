@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NavigableMap;
-import java.util.TreeMap;
 
 import javax.imageio.ImageIO;
 
@@ -17,11 +15,8 @@ public class Block {
 	private String name;
 	private BufferedImage image;
 	private Color avgRGBColors; // average of all of the RGB values for each pixel in Block
-	private int count;
 
-	protected final static Map<Block, Color> block2Color = new HashMap<>();
 	protected final static Map<Color, BufferedImage> color2image = new HashMap<>();
-	// TreeMap<>();
 
 	public Block(File path) throws IOException {
 		this.path = path;
@@ -30,8 +25,6 @@ public class Block {
 		this.avgRGBColors = this.calculateAvgRGBColors(this.image);
 
 		color2image.put(this.avgRGBColors, this.image);
-		// block2Color.put(this, this.avgRGBColors);
-		// counts.put(this, counts.get(this) + 1);
 	}
 
 	// Get the average R,G,B integer value for all pixels in each Block
@@ -67,10 +60,6 @@ public class Block {
 
 	public Color getAvgRGBColors() {
 		return this.avgRGBColors;
-	}
-
-	public void incrementCount(String name) {
-		this.count++;
 	}
 
 }
